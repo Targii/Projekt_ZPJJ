@@ -12,8 +12,6 @@ Celem projektu jest stworzenie aplikacji webowej do udostępniania notatek międ
 
 
 Support::+1:
-Targii@git
-maciejparol@git
 
 @Targii
 @maciejparol
