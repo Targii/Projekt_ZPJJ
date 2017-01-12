@@ -3,50 +3,41 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.mavenproject1.entity;
 
-import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-
+package com.mycompany.mavenproject1.models;
+import com.mycompany.mavenproject1.entity.UserEntity;
 /**
  *
  * @author Adam
  */
-
-@Entity
-@Table(schema = "web", name = "user",
-      uniqueConstraints = {
-            @UniqueConstraint(columnNames = {"login"})
-        }
-)
-public class UserEntity implements Serializable{
-    
-    
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
+public class UserDTO implements Map<UserEntity, UserDTO>{
     private Long id;
-
-    @Column(name = "login")
     private String login;
-
-    @Column(name = "first_name")
     private String firstName;
-
-    @Column(name = "last_name")
     private String lastName;
-
-    @Column(name = "email")
     private String email;
+    
+    @Override
+    public UserDTO getForRestJson(UserEntity entity){
+        this.id = entity.getId();
+        this.login = entity.getLogin();
+        this.firstName = entity.getFirstName();
+        this.lastName = entity.getLastName();
+        this.email = entity.getEmail();
+        return this;
+    }
+    
+    @Override
+    public void getForEntity(UserEntity entity){
+        entity.setLogin(login);
+        entity.setFirstName(firstName);
+        entity.setLastName(lastName);
+        entity.setEmail(email);
+    }
+    
+    
+            
+            
     public void setId(Long id) {
         this.id = id;
     }
@@ -65,10 +56,6 @@ public class UserEntity implements Serializable{
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
     }
 
     public Long getId() {
@@ -90,8 +77,6 @@ public class UserEntity implements Serializable{
     public String getEmail() {
         return email;
     }
-    
 
-    
     
 }
