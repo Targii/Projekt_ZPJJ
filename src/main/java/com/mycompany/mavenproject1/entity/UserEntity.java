@@ -38,6 +38,9 @@ public class UserEntity implements Serializable{
 
     @Column(name = "login")
     private String login;
+    
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "first_name")
     private String firstName;
@@ -47,6 +50,7 @@ public class UserEntity implements Serializable{
 
     @Column(name = "email")
     private String email;
+    
     public void setId(Long id) {
         this.id = id;
     }
@@ -65,6 +69,10 @@ public class UserEntity implements Serializable{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    
+        public void setPassword(String password) {
+        this.password = password;
     }
 
     public static long getSerialVersionUID() {
@@ -90,6 +98,12 @@ public class UserEntity implements Serializable{
     public String getEmail() {
         return email;
     }
+    
+    public String getPassword() {
+        return password;
+    }
+
+
     
 
     
