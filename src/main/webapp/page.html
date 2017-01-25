@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+
+    <title>Note System</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+
+    <script src="assets/js/changecontent.js"></script>
+
+  </head>
+
+  <body>
+
+     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#" onclick="load_home()">Note System.</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#" onclick="load_home()">HOME</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">NOTE<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#" onclick="load_add()">ADD</a></li>
+                <li><a href="#" onclick="load_manage()">MANAGE</a></li>
+		<li><a href="#" onclick="load_search()">SEARCH</a></li>
+              </ul>
+            </li>
+	    <li><a href="#" onclick="load_remove()">REMOVE USER</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+
+	 <div id="service">
+<div class="container">
+ 	<div class="row centered">
+ 		<div class="col-md-4"> 					
+ 			<h4>Add Note</h4>
+ 			<p>You can add note....</p>
+ 			<p><br/><a href="#" onclick="load_add()" class="btn btn-theme">Add</a></p>
+ 		</div>
+ 		<div class="col-md-4">
+			<h4>Menage Note</h4>					
+			<p>You can menage...</p>
+ 			<p><br/><a href="#" onclick="load_menage()" class="btn btn-theme">Menage</a></p>
+ 		</div>
+		<div class="col-md-4">
+			<h4>Search</h4>
+			<p>You can search...</p>
+			<p><br/><a href="#" onclick="load_search()" class="btn btn-theme">Search</a></p>
+		</div>		 				
+	</div>
+</div><! --/container -->
+</div>
+
+
+
+	 
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/retina-1.1.0.js"></script>
+	<script src="assets/js/jquery.hoverdir.js"></script>
+	<script src="assets/js/jquery.hoverex.min.js"></script>
+  	<script src="assets/js/custom.js"></script>
+
+  </body>
+</html>

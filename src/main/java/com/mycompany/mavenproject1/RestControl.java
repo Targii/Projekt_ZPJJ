@@ -50,7 +50,7 @@ public class RestControl {
         try{
             UserEntity response = service.loginUser(username, password);
             if(response != null){
-            return Response.seeOther(URI.create("../login.html")).build();
+            return Response.seeOther(URI.create("../page.html")).build();
             }else{
                 return Response.seeOther(URI.create("../error.html")).build();
             }
