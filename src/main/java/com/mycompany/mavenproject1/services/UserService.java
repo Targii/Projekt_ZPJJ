@@ -28,6 +28,18 @@ public class UserService {
         return new UserDTO().getForRestJson(userEntity);
     }
     
+    public UserEntity loginUser(String login, String password){
+        UserEntity user = dao.findUserbyCred(login);
+        if(password.equals(user.getPassword())){
+            return user;    
+        }
+        else {
+            return null;
+        }
+        
+        
+    }
+    
 
     
 }

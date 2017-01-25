@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -26,6 +28,9 @@ import javax.persistence.UniqueConstraint;
             @UniqueConstraint(columnNames = {"login"})
         }
 )
+@NamedQueries({
+    @NamedQuery(name = "User.byLogin", query = "SELECT u FROM UserEntity u WHERE u.login = :login")
+})
 public class UserEntity implements Serializable{
     
     

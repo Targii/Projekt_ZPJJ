@@ -5,6 +5,12 @@
  */
 package com.mycompany.mavenproject1;
 
+import com.mycompany.mavenproject1.entity.UserEntity;
+import com.mycompany.mavenproject1.models.UserDTO;
+import com.mycompany.mavenproject1.services.UserService;
+import java.net.URI;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -24,7 +30,16 @@ public class RestControl {
     @Path("/")
     public Response test(){
         return Response.status(200).entity("test").build();
-        
+                try{
+            if(username.equals("adatar") && password.equals("adatar")){ //this seems like a great start of wildfly usage...
+                return Response.status(Response.Status.OK).entity("This is rest TEST").build(); 
+            }else{
+                return Response.seeOther(URI.create("../login.html")).build();
+            }
+            
+        }catch(Exception e){
+            
+        }
     }
 */
     //Apparently this works only when the test() is available... hmm wierd... or not?
@@ -32,17 +47,48 @@ public class RestControl {
     @Path("login")
     public Response login(@FormParam("username") String username, @FormParam("password") String password){
         try{
-            if(username.equals("adatar") && password.equals("adatar")){ //this seems like a great start of wildfly usage...
-                return Response.status(Response.Status.OK).entity("This is rest TEST").build(); 
+            UserEntity response = service.loginUser(username, password);
+            if(response != null){
+            return Response.seeOther(URI.create("../index.html")).build();
             }else{
-                return Response.status(Response.Status.UNAUTHORIZED).entity("unauthorized").build();
+                return Response.seeOther(URI.create("../error.html")).build();
             }
-            
-        }catch(Exception e){
-            
+        }catch(Exception ex){
+            return Response.seeOther(URI.create("../error.html")).build();
         }
         
-   return Response.status(Response.Status.OK).entity("TRY FAILED").build();
+        
+
+        
+   
+    }
+    
+    @Inject
+    UserService service;
+    
+    
+    @POST
+    @Path("all")
+    public Response signup(@FormParam("login") String login, @FormParam("firstName") 
+            String firstName, @FormParam("lastName") String lastName, @FormParam("email") String email ,@FormParam("password") String password){
+        
+        UserDTO userDTO = new UserDTO();
+                
+        userDTO.setEmail(email);
+        userDTO.setFirstName(firstName);
+        userDTO.setLastName(lastName);
+        userDTO.setLogin(login);
+        userDTO.setPassword(password);
+                
+        try{
+            UserDTO response = service.createUser(userDTO);
+            return Response.accepted().entity(response).build();
+        }catch(Exception ex){
+            return Response.serverError().build();
+        }
+        
+        
+        
     }
     
 }

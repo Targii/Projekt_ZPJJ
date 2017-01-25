@@ -5,10 +5,13 @@
  */
 package com.mycompany.mavenproject1.db;
 
+import com.mycompany.mavenproject1.entity.UserEntity;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,6 +29,19 @@ public class DAO {
     
     public <T> T find(long id, Class<T> clazz){
         return em.find(clazz, id);
+    }
+    
+    public UserEntity findUserbyCred(String login){
+        Query q = em.createNamedQuery("User.byLogin");
+        q.setParameter("login", login);
+        q.setMaxResults(1);
+        List<UserEntity> us = q.getResultList();
+        if(us.isEmpty()){
+            return null;
+        }else{
+            return us.get(0);
+        }
+            
     }
     
 }
