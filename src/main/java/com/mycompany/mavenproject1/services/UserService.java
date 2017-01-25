@@ -5,11 +5,14 @@
  */
 package com.mycompany.mavenproject1.services;
 
+import com.mycompany.mavenproject1.RestControl;
 import com.mycompany.mavenproject1.db.DAO;
 import com.mycompany.mavenproject1.entity.UserEntity;
 import com.mycompany.mavenproject1.models.UserDTO;
+import java.security.MessageDigest;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.xml.bind.DatatypeConverter;
 
 /**
  *
@@ -30,16 +33,25 @@ public class UserService {
     
     public UserEntity loginUser(String login, String password){
         UserEntity user = dao.findUserbyCred(login);
-        if(password.equals(user.getPassword())){
+        if(hashSHA(password).equals(user.getPassword())){
             return user;    
         }
         else {
             return null;
         }
-        
-        
+
     }
     
+        public static String hashSHA(String password) {
+        try {
+            return DatatypeConverter.printHexBinary(MessageDigest.getInstance("SHA-256").digest(password.getBytes("UTF-8")));
+        } catch (Exception e) {
+            
+        }
+        return null;
+    }
+    
+
 
     
 }
