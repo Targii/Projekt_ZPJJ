@@ -21,12 +21,29 @@
     </head>
     <body>
         <div class="container">
-            <div class="row centered">
-                <div class="col-md-4"> 					
-                    <h4>Search page</h4>
-                    <p> in progress...</p>
-                </div>
-            </div>
+            <form action="rest/add" method="post">
+
+                <label>
+                    Search<span class="req"></span>
+                </label>
+                <br>
+                <input type="text" required autocomplete="on" name="search"/>
+                <br>
+                <button class="btn btn-theme"/>Search</button>          
+            </form>
+            <br>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                    </tr>
+                </thead>
+
+            </table>
+            <br>
+
+
         </div><! --/container -->
     </body>
 </html>

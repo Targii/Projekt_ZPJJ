@@ -52,6 +52,7 @@ public class RestControl {
             if(response != null){
             return Response.seeOther(URI.create("../page.html")).build();
             }else{
+               
                 return Response.seeOther(URI.create("../error.html")).build();
             }
         }catch(Exception ex){
