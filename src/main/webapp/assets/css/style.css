@@ -1,11 +1,6 @@
 /*	################################################################
 
-        Author: Carlos Alvarez
-        URL: http://alvarez.is
 
-        Project Name: SOLID - Bootstrap 3 Theme
-        Version: 1.0
-        URL: http://alvarez.is
         
 ################################################################# */ 
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,700,900);
@@ -423,7 +418,10 @@ csmall2 {
     -o-background-size: cover;
     background-size: cover;
 }
-
+.notes{
+    background-color: #ffff91;
+    box-shadow: 10px 10px 5px #888888;
+}
 /* Blog Page */
 .popular-posts { 
     margin: 0px;

@@ -25,12 +25,6 @@ public class JaxRsActivator extends Application{
     }
     
     private void addRestResourceClasses(Set<Class<?>> resources){
-        //resources.add(com.mycompany.mavenproject1.RestControl.class);
-        resources.add(com.mycompany.mavenproject1.RestControl.class);
-        resources.add(com.mycompany.mavenproject1.endpoints.CoreEndpoint.class);
-        resources.add(com.mycompany.mavenproject1.endpoints.NoteEndpoint.class);
-        resources.add(com.mycompany.mavenproject1.endpoints.UserEndpoint.class);
-        resources.add(com.mycompany.mavenproject1.providers.JacksonJsonProvider.class);
     }
     
     
