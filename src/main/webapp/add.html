@@ -23,8 +23,16 @@
     <body>
         <div class="container">
             <form action="rest/add" method="post">
+                
+                <label>
+                    Title<span class="req"></span>
+                </label>
+                <br>
+                <input type="text" required autocomplete="on" name="title"/>
+                <br>
+                <br>
                 <textarea cols="80" id="editor1" name="editor1" rows="10" >
-            Here, you can write note
+                    Here, you can write note
                 </textarea>
 
                 <script>
