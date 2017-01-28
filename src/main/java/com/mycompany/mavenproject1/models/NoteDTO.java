@@ -17,6 +17,7 @@ public class NoteDTO implements Map<NoteEntity, NoteDTO>{
     private Long id;     
     private String login;
     private String title;
+    private String text;
     private String ispublic;
     private String editableby;
     private String viewableby;
@@ -26,6 +27,7 @@ public class NoteDTO implements Map<NoteEntity, NoteDTO>{
         this.id = entity.getId();
         this.login = entity.getLogin();
         this.title = entity.getTitle();
+        this.text = entity.getText();
         this.ispublic = entity.getIspublic();
         this.editableby = entity.getEditableby();
         this.viewableby = entity.getViewableby();
@@ -37,12 +39,20 @@ public class NoteDTO implements Map<NoteEntity, NoteDTO>{
         entity.setId(id);
         entity.setLogin(login);
         entity.setTitle(title);
+        entity.setText(text);
         entity.setIspublic(ispublic);
         entity.setEditableby(editableby);
         entity.setViewableby(viewableby);
         
     }
+    
+    public void setText(String text) {
+        this.text = text;
+    }
 
+    public String getText() {
+        return text;
+    }
     public void setEditableby(String editableby) {
         this.editableby = editableby;
     }

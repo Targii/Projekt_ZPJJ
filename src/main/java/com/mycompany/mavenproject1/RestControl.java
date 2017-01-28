@@ -15,6 +15,10 @@ import javax.inject.Inject;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Cookie;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.DatatypeConverter;
 
@@ -46,11 +50,13 @@ public class RestControl {
     //Apparently this works only when the test() is available... hmm wierd... or not?
     @POST
     @Path("login")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response login(@FormParam("username") String username, @FormParam("password") String password){
         try{
-            UserEntity response = service.loginUser(username, password);
+            String response = service.loginUser(username, password);
+
             if(response != null){
-            return Response.seeOther(URI.create("../page.html")).build();
+            return Response.seeOther(URI.create("../page.html")).cookie(new NewCookie("token", response, "/", null, "Our Token",900, false, false)).build();
             }else{
                
                 return Response.seeOther(URI.create("../error.html")).build();
@@ -58,12 +64,12 @@ public class RestControl {
         }catch(Exception ex){
             return Response.seeOther(URI.create("../error.html")).build();
         }
-        
-        
 
-        
+
    
     }
+    
+
     
     @Inject
     UserService service;

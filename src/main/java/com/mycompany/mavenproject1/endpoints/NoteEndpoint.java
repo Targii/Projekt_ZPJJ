@@ -22,19 +22,19 @@ import javax.ws.rs.core.Response;
  */
 @RequestScoped
 @Path("note")
-public class NoteEndpoint {
+public class NoteEndpoint extends BaseEndpoint{
     
     @Inject
     NoteService service;
     
-        @POST
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addNote(NoteDTO noteDTO){
         
         try{
             NoteDTO response = service.createNote(noteDTO);
             Response.accepted().entity(response).build();
-            return Response.seeOther(new URI("../login.html")).build();  //TODO: Zmiana linku
+            return Response.accepted().entity(noteDTO).build();
         }catch(Exception ex){
             return Response.serverError().build();
         }

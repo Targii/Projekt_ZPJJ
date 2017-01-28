@@ -10,6 +10,7 @@ import com.mycompany.mavenproject1.db.DAO;
 import com.mycompany.mavenproject1.entity.UserEntity;
 import com.mycompany.mavenproject1.models.UserDTO;
 import java.security.MessageDigest;
+import java.sql.Timestamp;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.xml.bind.DatatypeConverter;
@@ -31,10 +32,10 @@ public class UserService {
         return new UserDTO().getForRestJson(userEntity);
     }
     
-    public UserEntity loginUser(String login, String password){
+    public String loginUser(String login, String password){
         UserEntity user = dao.findUserbyCred(login);
         if(hashSHA(password).equals(user.getPassword())){
-            return user;    
+            return hashSHA(password + user.getEmail() + new Timestamp(System.currentTimeMillis()).getTime());    
         }
         else {
             return null;

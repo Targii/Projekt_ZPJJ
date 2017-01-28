@@ -28,7 +28,7 @@ import javax.ws.rs.core.Response;
  */
 @RequestScoped
 @Path("user")
-public class UserEndpoint {
+public class UserEndpoint extends BaseEndpoint{
     
     @Inject
     UserService service;

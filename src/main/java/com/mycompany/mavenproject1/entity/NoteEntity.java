@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 /**
  *
@@ -36,6 +35,9 @@ public class NoteEntity implements Serializable{
     
     @Column(name = "title")
     private String title;
+    
+    @Column(name = "text")
+    private String text;
 
     @Column(name = "ispublic")
     private String ispublic;
@@ -45,6 +47,14 @@ public class NoteEntity implements Serializable{
 
     @Column(name = "viewableby")
     private String viewableby;
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 
     public void setId(Long id) {
         this.id = id;
