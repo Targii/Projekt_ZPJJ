@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -20,7 +22,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(schema = "web", name = "notes")
-      
+      @NamedQueries({
+    @NamedQuery(name = "Notes.byLogin", query = "SELECT u FROM NoteEntity u WHERE u.login = :login")
+    
+})
 public class NoteEntity implements Serializable{
     
     private static final long serialVersionUID = 1L;
@@ -40,7 +45,7 @@ public class NoteEntity implements Serializable{
     private String text;
 
     @Column(name = "ispublic")
-    private String ispublic;
+    private boolean ispublic;
 
     @Column(name = "editableby")
     private String editableby;
@@ -68,7 +73,7 @@ public class NoteEntity implements Serializable{
         this.title = title;
     }
 
-    public void setIspublic(String ispublic) {
+    public void setIspublic(boolean ispublic) {
         this.ispublic = ispublic;
     }
 
@@ -96,7 +101,7 @@ public class NoteEntity implements Serializable{
         return title;
     }
 
-    public String getIspublic() {
+    public boolean getIspublic() {
         return ispublic;
     }
 

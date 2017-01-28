@@ -7,12 +7,15 @@ package com.mycompany.mavenproject1.endpoints;
 
 import com.mycompany.mavenproject1.models.NoteDTO;
 import com.mycompany.mavenproject1.services.NoteService;
+import com.sun.net.httpserver.Headers;
 import java.net.URI;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -24,6 +27,9 @@ import javax.ws.rs.core.Response;
 @Path("note")
 public class NoteEndpoint extends BaseEndpoint{
     
+     @Context
+    private HttpHeaders headers;
+    
     @Inject
     NoteService service;
     
@@ -32,7 +38,9 @@ public class NoteEndpoint extends BaseEndpoint{
     public Response addNote(NoteDTO noteDTO){
         
         try{
-            NoteDTO response = service.createNote(noteDTO);
+            String token = headers.getHeaderString("Session-token");
+            
+            NoteDTO response = service.createNote(noteDTO,token);
             Response.accepted().entity(response).build();
             return Response.accepted().entity(noteDTO).build();
         }catch(Exception ex){

@@ -29,7 +29,8 @@ import javax.persistence.UniqueConstraint;
         }
 )
 @NamedQueries({
-    @NamedQuery(name = "User.byLogin", query = "SELECT u FROM UserEntity u WHERE u.login = :login")
+    @NamedQuery(name = "User.byLogin", query = "SELECT u FROM UserEntity u WHERE u.login = :login"),
+    @NamedQuery(name = "User.byToken", query = "SELECT u FROM UserEntity u WHERE u.token = :token")
 })
 public class UserEntity implements Serializable{
     
@@ -55,6 +56,17 @@ public class UserEntity implements Serializable{
 
     @Column(name = "email")
     private String email;
+    
+    @Column(name = "token")
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
     
     public void setId(Long id) {
         this.id = id;

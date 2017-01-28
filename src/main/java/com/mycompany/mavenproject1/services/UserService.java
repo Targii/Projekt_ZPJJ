@@ -34,8 +34,10 @@ public class UserService {
     
     public String loginUser(String login, String password){
         UserEntity user = dao.findUserbyCred(login);
+        String token = hashSHA(password + user.getEmail() + new Timestamp(System.currentTimeMillis()).getTime());
+        user.setToken(token);
         if(hashSHA(password).equals(user.getPassword())){
-            return hashSHA(password + user.getEmail() + new Timestamp(System.currentTimeMillis()).getTime());    
+            return token;    
         }
         else {
             return null;

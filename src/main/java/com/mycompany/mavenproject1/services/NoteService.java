@@ -22,9 +22,12 @@ public class NoteService {
     @Inject
     private DAO dao;
     
-        public NoteDTO createNote(NoteDTO noteDTO){
+        public NoteDTO createNote(NoteDTO noteDTO,String token){
         NoteEntity noteEntity = new NoteEntity();
+        UserEntity user = dao.findUserByToken(token);
+        noteDTO.setLogin(user.getLogin());
         noteDTO.getForEntity(noteEntity);
+        
         dao.create(noteEntity);
         return new NoteDTO().getForRestJson(noteEntity);
     }

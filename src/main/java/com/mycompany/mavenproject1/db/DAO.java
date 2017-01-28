@@ -44,4 +44,17 @@ public class DAO {
             
     }
     
+        public UserEntity findUserByToken(String token){
+        Query q = em.createNamedQuery("User.byToken");
+        q.setParameter("token", token);
+        q.setMaxResults(1);
+        List<UserEntity> us = q.getResultList();
+        if(us.isEmpty()){
+            return null;
+        }else{
+            return us.get(0);
+        }
+            
+    }
+    
 }

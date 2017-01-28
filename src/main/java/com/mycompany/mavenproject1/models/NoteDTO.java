@@ -18,7 +18,7 @@ public class NoteDTO implements Map<NoteEntity, NoteDTO>{
     private String login;
     private String title;
     private String text;
-    private String ispublic;
+    private boolean ispublic;
     private String editableby;
     private String viewableby;
 
@@ -69,7 +69,7 @@ public class NoteDTO implements Map<NoteEntity, NoteDTO>{
         this.title = title;
     }
 
-    public void setIspublic(String ispublic) {
+    public void setIspublic(boolean ispublic) {
         this.ispublic = ispublic;
     }
 
@@ -89,7 +89,7 @@ public class NoteDTO implements Map<NoteEntity, NoteDTO>{
         return title;
     }
 
-    public String getIspublic() {
+    public boolean getIspublic() {
         return ispublic;
     }
 

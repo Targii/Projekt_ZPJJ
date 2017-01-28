@@ -17,6 +17,7 @@ public class UserDTO implements Map<UserEntity, UserDTO>{
     private String firstName;
     private String lastName;
     private String email;
+    private String token;
     
     @Override
     public UserDTO getForRestJson(UserEntity entity){
@@ -26,6 +27,7 @@ public class UserDTO implements Map<UserEntity, UserDTO>{
         this.firstName = entity.getFirstName();
         this.lastName = entity.getLastName();
         this.email = entity.getEmail();
+        this.token = entity.getToken();
         return this;
     }
     
@@ -36,11 +38,17 @@ public class UserDTO implements Map<UserEntity, UserDTO>{
         entity.setFirstName(firstName);
         entity.setLastName(lastName);
         entity.setEmail(email);
+        entity.setToken(token);
     }
-    
-    
-            
-            
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+          
     public void setId(Long id) {
         this.id = id;
     }
