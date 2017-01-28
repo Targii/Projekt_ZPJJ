@@ -23,7 +23,7 @@ import javax.ws.rs.core.Response;
 public class CoreEndpoint {
     @Context
     protected HttpServletRequest servletRequest;
-
+    
     public HttpServletRequest getServletRequest() {
         return servletRequest;
     }

@@ -1,6 +1,7 @@
 function load_home() {
-    document.getElementById("service").innerHTML = "";
-    document.getElementById("service").innerHTML = '<object type="text/html" data="home.html" style="width:100%; height: 100%;"></object>';
+    document.location.href = "page.html";
+    //document.getElementById("service").innerHTML = "";
+    //document.getElementById("service").innerHTML = '<object type="text/html" data="home.html" style="width:100%; height: 100%;"></object>';
 }
 function load_add() {
     document.getElementById("service").innerHTML = "";
