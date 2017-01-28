@@ -5,6 +5,7 @@
  */
 package com.mycompany.mavenproject1.db;
 
+import com.mycompany.mavenproject1.entity.NoteEntity;
 import com.mycompany.mavenproject1.entity.UserEntity;
 import java.io.Serializable;
 import java.util.List;
@@ -56,5 +57,15 @@ public class DAO {
         }
             
     }
+        public List<NoteEntity> getUserNotes(String login){
+            Query q = em.createNamedQuery("Notes.byLogin");
+            q.setParameter("login", login);
+            List<NoteEntity> ns = q.getResultList();
+            if(ns.isEmpty()){
+            return null;
+        }else{
+            return ns;
+        }
+        }
     
 }

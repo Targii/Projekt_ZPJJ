@@ -10,6 +10,8 @@ import com.mycompany.mavenproject1.entity.NoteEntity;
 import com.mycompany.mavenproject1.entity.UserEntity;
 import com.mycompany.mavenproject1.models.NoteDTO;
 import com.mycompany.mavenproject1.models.UserDTO;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -31,5 +33,17 @@ public class NoteService {
         dao.create(noteEntity);
         return new NoteDTO().getForRestJson(noteEntity);
     }
+        
+        public List<NoteDTO> listnotes(String token){
+            UserEntity user = dao.findUserByToken(token);
+            List<NoteEntity> notes = dao.getUserNotes(user.getLogin());
+            List<NoteDTO> notesDTO = new ArrayList<>();
+            //notes.forEach(note -> notesDTO.add(new NoteDTO().getForRestJson(note)));  <-- Not supported for source 1.7
+            for(NoteEntity x : notes){
+                notesDTO.add(new NoteDTO().getForRestJson(x));
+            }
+            
+            return notesDTO;
+        }
     
 }

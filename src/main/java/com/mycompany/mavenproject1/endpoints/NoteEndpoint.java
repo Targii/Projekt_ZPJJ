@@ -9,9 +9,11 @@ import com.mycompany.mavenproject1.models.NoteDTO;
 import com.mycompany.mavenproject1.services.NoteService;
 import com.sun.net.httpserver.Headers;
 import java.net.URI;
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -51,6 +53,15 @@ public class NoteEndpoint extends BaseEndpoint{
             return Response.serverError().build();
         }
            
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("mynotes")
+    public Response listMyNotes(){
+        String token = headers.getHeaderString("Session-token");
+        List<NoteDTO> response = service.listnotes(token);
+        return Response.accepted().entity(response).build();
     }
     
 }

@@ -35,6 +35,50 @@
 
             </table>
         </div><! --/container -->
+        
+        <script type="text/javascript">
+            var tableRef = document.getElementById('mynotes').getElementsByTagName('tbody')[0];
+            var xhr = new XMLHttpRequest();
+                    xhr.open("GET", 'rest/note/mynotes', true);
+                    
+                    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+                    xhr.setRequestHeader("Session-token", getCookie("token"));
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState == XMLHttpRequest.DONE) {
+                            if (xhr.status !== 500) {
+                                var jsonObject = JSON.parse(xhr.responseText);
+                                
+                                    console.log(jsonObject)
+                                    
+                                    jsonObject.forEach(function (entry) {
+                                        var newRow   = tableRef.insertRow(tableRef.rows.length);
+                                        var newCell  = newRow.insertCell(0);
+                                        var newText  = document.createTextNode(entry.title);
+                                        newCell.appendChild(newText);
+                                        var newCell  = newRow.insertCell(1);
+                                        var newText  = document.createTextNode(entry.id);
+                                        newCell.appendChild(newText);
+                                    });
+                                } else {
+                                    //alert("Błąd logowania");
+                                }
+                            } else {
+                                //alert("Błąd logowania");
+                            }
+                        }
+                    
+                    xhr.send();
+                    
+                    
+                      
+            
+                function getCookie(name) {
+                 var value = "; " + document.cookie;
+                 var parts = value.split("; " + name + "=");
+                 if (parts.length == 2) return parts.pop().split(";").shift();
+            }
+        </script>
     </body>
 </html>
 
