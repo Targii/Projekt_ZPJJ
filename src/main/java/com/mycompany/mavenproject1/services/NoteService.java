@@ -45,5 +45,10 @@ public class NoteService {
             
             return notesDTO;
         }
+        
+        public NoteDTO myNote(Long id){
+            NoteEntity note = dao.getNote(id);
+            return new NoteDTO().getForRestJson(note);
+        }
     
 }

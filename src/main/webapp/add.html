@@ -81,6 +81,7 @@
                     data['ispublic'] = "true"; //TODO from checkbox
                     data['editableby'] = "a";
                     data['viewableby'] = "a";
+                    var tags = "fucking tags";
 
                     var xhr = new XMLHttpRequest();
                     xhr.open("POST", 'rest/note', true);
@@ -97,6 +98,7 @@
                     }
                     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
                     xhr.setRequestHeader("Session-token", getCookie("token"));
+                    xhr.setRequestHeader("T", getCookie("token"));
                     xhr.send(JSON.stringify(data));
 
                 }

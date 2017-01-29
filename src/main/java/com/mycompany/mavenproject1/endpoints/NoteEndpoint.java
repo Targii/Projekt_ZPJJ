@@ -42,6 +42,7 @@ public class NoteEndpoint extends BaseEndpoint{
     @Produces(MediaType.APPLICATION_JSON)
     public Response addNote(NoteDTO noteDTO){
         
+        
         try{
             String token = headers.getHeaderString("Session-token");
             
@@ -63,5 +64,16 @@ public class NoteEndpoint extends BaseEndpoint{
         List<NoteDTO> response = service.listnotes(token);
         return Response.accepted().entity(response).build();
     }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("onenote")
+    public Response myNote(){
+        String token = headers.getHeaderString("Session-token");
+        Long id = Long.parseLong(headers.getHeaderString("Note-id"));
+        NoteDTO noteDTO = service.myNote(id);
+        return Response.accepted().entity(noteDTO).build();
+    }
+    
     
 }

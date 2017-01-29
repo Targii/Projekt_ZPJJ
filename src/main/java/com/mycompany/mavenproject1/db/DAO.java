@@ -46,25 +46,37 @@ public class DAO {
     }
     
         public UserEntity findUserByToken(String token){
-        Query q = em.createNamedQuery("User.byToken");
-        q.setParameter("token", token);
-        q.setMaxResults(1);
-        List<UserEntity> us = q.getResultList();
-        if(us.isEmpty()){
-            return null;
-        }else{
-            return us.get(0);
-        }
+            Query q = em.createNamedQuery("User.byToken");
+            q.setParameter("token", token);
+            q.setMaxResults(1);
+            List<UserEntity> us = q.getResultList();
+            if(us.isEmpty()){
+                return null;
+            }else{
+                return us.get(0);
+            }
             
     }
         public List<NoteEntity> getUserNotes(String login){
             Query q = em.createNamedQuery("Notes.byLogin");
             q.setParameter("login", login);
+            q.setMaxResults(1);
             List<NoteEntity> ns = q.getResultList();
             if(ns.isEmpty()){
-            return null;
-        }else{
-            return ns;
+                return null;
+            }else{
+                return ns;
+        }
+        }
+        
+        public NoteEntity getNote(Long id){
+            Query q = em.createNamedQuery("Notes.byId");
+            q.setParameter("id", id);
+            List<NoteEntity> ns = q.getResultList();
+            if(ns.isEmpty()){
+                return null;
+            }else{
+                return ns.get(0);
         }
         }
     

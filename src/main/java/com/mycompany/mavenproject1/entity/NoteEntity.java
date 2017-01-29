@@ -23,7 +23,8 @@ import javax.persistence.Table;
 @Entity
 @Table(schema = "web", name = "notes")
       @NamedQueries({
-    @NamedQuery(name = "Notes.byLogin", query = "SELECT u FROM NoteEntity u WHERE u.login = :login")
+    @NamedQuery(name = "Notes.byLogin", query = "SELECT u FROM NoteEntity u WHERE u.login = :login"),
+    @NamedQuery(name = "Notes.byId", query = "SELECT u FROM NoteEntity u WHERE u.id = :id")
     
 })
 public class NoteEntity implements Serializable{
