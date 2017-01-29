@@ -26,7 +26,8 @@
                 <thead>
                     <tr>
                         <th>Title</th>
-                        <th>Manage</th>
+                        <th>Settings</th>
+                        <th>Remove</th>
                     </tr>
                 </thead>
                 <tbody class="mynotes">
@@ -35,48 +36,58 @@
 
             </table>
         </div><! --/container -->
-        
+
         <script type="text/javascript">
             var tableRef = document.getElementById('mynotes').getElementsByTagName('tbody')[0];
             var xhr = new XMLHttpRequest();
-                    xhr.open("GET", 'rest/note/mynotes', true);
-                    
-                    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-                    xhr.setRequestHeader("Session-token", getCookie("token"));
+            xhr.open("GET", 'rest/note/mynotes', true);
 
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState == XMLHttpRequest.DONE) {
-                            if (xhr.status !== 500) {
-                                var jsonObject = JSON.parse(xhr.responseText);
-                                
-                                    console.log(jsonObject)
-                                    
-                                    jsonObject.forEach(function (entry) {
-                                        var newRow   = tableRef.insertRow(tableRef.rows.length);
-                                        var newCell  = newRow.insertCell(0);
-                                        var newText  = document.createTextNode(entry.title);
-                                        newCell.appendChild(newText);
-                                        var newCell  = newRow.insertCell(1);
-                                        var newText  = document.createTextNode(entry.id);
-                                        newCell.appendChild(newText);
-                                    });
-                                } else {
-                                    //alert("Błąd logowania");
-                                }
-                            } else {
-                                //alert("Błąd logowania");
-                            }
-                        }
-                    
-                    xhr.send();
-                    
-                    
-                      
-            
-                function getCookie(name) {
-                 var value = "; " + document.cookie;
-                 var parts = value.split("; " + name + "=");
-                 if (parts.length == 2) return parts.pop().split(";").shift();
+            xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+            xhr.setRequestHeader("Session-token", getCookie("token"));
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    if (xhr.status !== 500) {
+                        var jsonObject = JSON.parse(xhr.responseText);
+
+                        console.log(jsonObject)
+
+                        jsonObject.forEach(function (entry) {
+                            var newRow = tableRef.insertRow(tableRef.rows.length);
+                            var newCell = newRow.insertCell(0);
+                            var newText = '<a href="/note/title=' + entry.title + '">' + entry.title + "</a>";
+                            //var newText  = "<a href='/note/title="+ entry.title +'">'+ entry.title+'</a>';
+                            newCell.innerHTML = newText;
+                            //newCell.appendChild(newText);
+                            var newCell = newRow.insertCell(1);
+                            var newText = '<p><a href="/settings/id=' + entry.id+ '"><span class="glyphicon glyphicon-pencil"></span></a></p>';
+                            //var newText  = document.createTextNode(entry.id);
+                            newCell.innerHTML = newText;
+                            //newCell.appendChild(newText)
+                            var newCell = newRow.insertCell(2);
+                            var newText = '<p><a href="/remove/id=' + entry.id+ '"><span class="glyphicon glyphicon-remove"></span></a></p>';
+                            //var newText  = document.createTextNode(entry.id);
+                            newCell.innerHTML = newText;
+                            //newCell.appendChild(newText);
+                        });
+                    } else {
+                        //alert("Błąd logowania");
+                    }
+                } else {
+                    //alert("Błąd logowania");
+                }
+            }
+
+            xhr.send();
+
+
+
+
+            function getCookie(name) {
+                var value = "; " + document.cookie;
+                var parts = value.split("; " + name + "=");
+                if (parts.length == 2)
+                    return parts.pop().split(";").shift();
             }
         </script>
     </body>
