@@ -21,9 +21,9 @@
 
     </head>
     <body>
-        <div class="container">
+        <div class="container" id="container">
             <div id="notes" class="notes">
-            
+
             </div>
             <table class="table" id="mynotes">
                 <thead>
@@ -38,7 +38,7 @@
                 </tbody>
 
             </table>
-            
+
         </div><! --/container -->
 
         <script type="text/javascript">
@@ -65,7 +65,7 @@
                             newCell.innerHTML = newText;
                             //newCell.appendChild(newText);
                             var newCell = newRow.insertCell(1);
-                            var newText = '<p><a href="/settings/id=' + entry.id + '"><span class="glyphicon glyphicon-pencil"></span></a></p>';
+                            var newText = '<p><a href="#" onclick="load_settings()"><span class="glyphicon glyphicon-pencil"></span></a></p>';
                             //var newText  = document.createTextNode(entry.id);
                             newCell.innerHTML = newText;
                             //newCell.appendChild(newText)
@@ -73,7 +73,7 @@
                             var newText = '<p><a href="/remove/id=' + entry.id + '"><span class="glyphicon glyphicon-remove"></span></a></p>';
                             //var newText  = document.createTextNode(entry.id);
                             newCell.innerHTML = newText;
-                            
+
                             //newCell.appendChild(newText);
                         });
                     } else {
@@ -115,8 +115,8 @@
                             var newText = document.createTextNode(jsonObject.id);
                             //alert(jsonObject.text);
                             document.getElementById("notes").innerHTML = "";
-                            document.getElementById("notes").innerHTML = '<h2>'+jsonObject.title+'</h2><br>'+jsonObject.text;
-                            scroll(0,0)
+                            document.getElementById("notes").innerHTML = '<h2>' + jsonObject.title + '</h2><br>' + jsonObject.text;
+                            scroll(0, 0);
                             //load_add();
 
 
@@ -142,7 +142,13 @@
                 }
             }
 
-
+        </script>
+        <script type="text/javascript">
+            function load_settings() {
+                document.getElementById("container").innerHTML = "";
+                document.getElementById("container").innerHTML = '<object type="text/html" data="settings.html" style="width:100%; height: 100%;"></object>';
+                scroll(0, 0);
+            }
         </script>
     </body>
 </html>
