@@ -60,7 +60,6 @@ public class DAO {
         public List<NoteEntity> getUserNotes(String login){
             Query q = em.createNamedQuery("Notes.byLogin");
             q.setParameter("login", login);
-            q.setMaxResults(1);
             List<NoteEntity> ns = q.getResultList();
             if(ns.isEmpty()){
                 return null;
@@ -72,6 +71,7 @@ public class DAO {
         public NoteEntity getNote(Long id){
             Query q = em.createNamedQuery("Notes.byId");
             q.setParameter("id", id);
+            q.setMaxResults(1);
             List<NoteEntity> ns = q.getResultList();
             if(ns.isEmpty()){
                 return null;

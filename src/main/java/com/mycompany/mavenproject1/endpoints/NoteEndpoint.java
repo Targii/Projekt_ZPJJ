@@ -45,6 +45,8 @@ public class NoteEndpoint extends BaseEndpoint{
         
         try{
             String token = headers.getHeaderString("Session-token");
+            String tags = headers.getHeaderString("Tag-Content");
+            
             
             NoteDTO response = service.createNote(noteDTO,token);
             
