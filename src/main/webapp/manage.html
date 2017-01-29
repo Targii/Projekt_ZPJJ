@@ -114,7 +114,7 @@
                             var newText = document.createTextNode(jsonObject.id);
                             //alert(jsonObject.text);
                             document.getElementById("notes").innerHTML = "";
-                            document.getElementById("notes").innerHTML = jsonObject.text;
+                            document.getElementById("notes").innerHTML = '<h2>'+jsonObject.title+'</h2><br>'+jsonObject.text;
                             scroll(0,0)
                             //load_add();
 
