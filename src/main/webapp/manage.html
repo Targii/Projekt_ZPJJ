@@ -18,10 +18,13 @@
         <link href="assets/css/font-awesome.min.css" rel="stylesheet">
 
         <script src="assets/js/changecontent.js"></script>
+
     </head>
     <body>
         <div class="container">
-
+            <div id="notes" class="notes">
+            
+            </div>
             <table class="table" id="mynotes">
                 <thead>
                     <tr>
@@ -55,19 +58,21 @@
                         jsonObject.forEach(function (entry) {
                             var newRow = tableRef.insertRow(tableRef.rows.length);
                             var newCell = newRow.insertCell(0);
-                            var newText = '<a href="/note/title=' + entry.title + '">' + entry.title + "</a>";
+                            var newText = '<a href="#" onclick="onenote(' + entry.id + ')">' + entry.title + '</a>';
                             //var newText  = "<a href='/note/title="+ entry.title +'">'+ entry.title+'</a>';
+                            //<tr><div id="notes" class="notes">test</div></tr>
                             newCell.innerHTML = newText;
                             //newCell.appendChild(newText);
                             var newCell = newRow.insertCell(1);
-                            var newText = '<p><a href="/settings/id=' + entry.id+ '"><span class="glyphicon glyphicon-pencil"></span></a></p>';
+                            var newText = '<p><a href="/settings/id=' + entry.id + '"><span class="glyphicon glyphicon-pencil"></span></a></p>';
                             //var newText  = document.createTextNode(entry.id);
                             newCell.innerHTML = newText;
                             //newCell.appendChild(newText)
                             var newCell = newRow.insertCell(2);
-                            var newText = '<p><a href="/remove/id=' + entry.id+ '"><span class="glyphicon glyphicon-remove"></span></a></p>';
+                            var newText = '<p><a href="/remove/id=' + entry.id + '"><span class="glyphicon glyphicon-remove"></span></a></p>';
                             //var newText  = document.createTextNode(entry.id);
                             newCell.innerHTML = newText;
+                            
                             //newCell.appendChild(newText);
                         });
                     } else {
@@ -89,6 +94,54 @@
                 if (parts.length == 2)
                     return parts.pop().split(";").shift();
             }
+        </script>
+        <script type="text/javascript">
+            function onenote(noteid) {
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", 'rest/note/onenote', true);
+
+                xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+                xhr.setRequestHeader("Session-token", getCookie("token"));
+                xhr.setRequestHeader("Note-id", noteid);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == XMLHttpRequest.DONE) {
+                        if (xhr.status !== 500) {
+                            var jsonObject = JSON.parse(xhr.responseText);
+
+                            console.log(jsonObject)
+                            var newText = document.createTextNode(jsonObject.id);
+                            //alert(jsonObject.text);
+                            document.getElementById("notes").innerHTML = "";
+                            document.getElementById("notes").innerHTML = jsonObject.text;
+                            scroll(0,0)
+                            //load_add();
+
+
+
+                        } else {
+                            //alert("Błąd logowania");
+                        }
+                    } else {
+                        //alert("Błąd logowania");
+                    }
+                }
+
+                xhr.send();
+
+
+
+
+                function getCookie(name) {
+                    var value = "; " + document.cookie;
+                    var parts = value.split("; " + name + "=");
+                    if (parts.length == 2)
+                        return parts.pop().split(";").shift();
+                }
+            }
+
+
         </script>
     </body>
 </html>
