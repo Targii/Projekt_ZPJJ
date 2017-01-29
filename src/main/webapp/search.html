@@ -30,7 +30,7 @@
                     Search<span class="req"></span>
                 </label>
                 <br>
-                <input type="text" required autocomplete="on" name="search"/>
+                <input type="text" required autocomplete="on" name="search" id="searchtag"/>
                 <br>
                 <button class="btn btn-theme"/>Search</button>          
             </form>
@@ -55,17 +55,19 @@
             var tableRef = document.getElementById('searchhash').getElementsByTagName('tbody')[0];
             var xhr = new XMLHttpRequest();
             //tu musisz zmienic
-            xhr.open("GET", 'rest/note/mynotes', true);
+            xhr.open("GET", 'rest/tag/searchtags', true);
 
             xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
             xhr.setRequestHeader("Session-token", getCookie("token"));
+            xhr.setRequestHeader("Tag-Content", document.getElementById("searchtag").value);
+            
 
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == XMLHttpRequest.DONE) {
                     if (xhr.status !== 500) {
                         var jsonObject = JSON.parse(xhr.responseText);
 
-                        console.log(jsonObject)
+                        console.log(jsonObject);
 
                         jsonObject.forEach(function (entry) {
                             var newRow = tableRef.insertRow(tableRef.rows.length);

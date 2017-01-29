@@ -41,10 +41,14 @@ public class TagEndpoint extends BaseEndpoint{
     public Response getByTag(){
         String token = headers.getHeaderString("Session-token");
         String tag = headers.getHeaderString("Tag-Content");
-        
+        System.out.println(tag);
+        if(tag != null){
         List<NoteDTO> response = tagservice.getNotesByTag(tag);
-        
         return Response.accepted().entity(response).build();
+        }else{
+            return Response.accepted().build();
+        }
+        
     }
     
 }
