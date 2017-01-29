@@ -7,8 +7,7 @@ package com.mycompany.mavenproject1.endpoints;
 
 import com.mycompany.mavenproject1.models.NoteDTO;
 import com.mycompany.mavenproject1.services.NoteService;
-import com.sun.net.httpserver.Headers;
-import java.net.URI;
+import com.mycompany.mavenproject1.services.TagService;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -37,6 +36,9 @@ public class NoteEndpoint extends BaseEndpoint{
     @Inject
     NoteService service;
     
+    @Inject
+    TagService tagservice;
+    
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -45,11 +47,8 @@ public class NoteEndpoint extends BaseEndpoint{
         
         try{
             String token = headers.getHeaderString("Session-token");
-            String tags = headers.getHeaderString("Tag-Content");
-            
-            
             NoteDTO response = service.createNote(noteDTO,token);
-            
+            tagservice.createTags(headers.getHeaderString("Tag-Content"), response.getId());
             Response.accepted().entity(response).build();
             return Response.accepted().entity(noteDTO).build();
         }catch(Exception ex){

@@ -12,11 +12,12 @@ import com.mycompany.mavenproject1.entity.UserEntity;
  *
  * @author Adam
  */
-public class TagDTO implements Map<TagEntity, TagDTO>{
+public class TagDTO implements Map<TagEntity, TagDTO> {
+
     private Long id;
     private String tag;
     private String notes;
-    
+
     @Override
     public TagDTO getForRestJson(TagEntity entity) {
         this.id = entity.getId();
@@ -32,7 +33,6 @@ public class TagDTO implements Map<TagEntity, TagDTO>{
         entity.setNotes(notes);
     }
 
-    
     public Long getId() {
         return id;
     }
@@ -57,5 +57,4 @@ public class TagDTO implements Map<TagEntity, TagDTO>{
         this.notes = notes;
     }
 
-    
 }

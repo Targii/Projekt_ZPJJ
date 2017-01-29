@@ -21,40 +21,37 @@ import javax.xml.bind.DatatypeConverter;
  */
 @Stateless
 public class UserService {
+
     //Wstrzykiwanie DAO
     @Inject
     private DAO dao;
-    
-    public UserDTO createUser(UserDTO userDTO){
+
+    public UserDTO createUser(UserDTO userDTO) {
         UserEntity userEntity = new UserEntity();
         userDTO.getForEntity(userEntity);
         dao.create(userEntity);
         return new UserDTO().getForRestJson(userEntity);
     }
-    
-    public String loginUser(String login, String password){
+
+    public String loginUser(String login, String password) {
         UserEntity user = dao.findUserbyCred(login);
         String token = hashSHA(password + user.getEmail() + new Timestamp(System.currentTimeMillis()).getTime());
         user.setToken(token);
-        if(hashSHA(password).equals(user.getPassword())){
-            return token;    
-        }
-        else {
+        if (hashSHA(password).equals(user.getPassword())) {
+            return token;
+        } else {
             return null;
         }
 
     }
-    
-        public static String hashSHA(String password) {
+
+    public static String hashSHA(String password) {
         try {
             return DatatypeConverter.printHexBinary(MessageDigest.getInstance("SHA-256").digest(password.getBytes("UTF-8")));
         } catch (Exception e) {
-            
+
         }
         return null;
     }
-    
 
-
-    
 }

@@ -24,7 +24,9 @@ import javax.persistence.Table;
 @Entity
 @Table(schema = "web", name = "tags")
       @NamedQueries({
-    @NamedQuery(name = "Tags.byTag", query = "SELECT u FROM TagEntity u WHERE u.tag = :tag")  
+    @NamedQuery(name = "Tags.byTag", query = "SELECT u FROM TagEntity u WHERE u.tag = :tag"),
+    @NamedQuery(name = "Tags.allTags", query = "SELECT u FROM TagEntity u")
+          
 })
 public class TagEntity implements Serializable{
     private static final long serialVersionUID = 1L;

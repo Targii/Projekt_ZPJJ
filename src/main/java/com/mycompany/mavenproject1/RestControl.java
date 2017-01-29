@@ -22,7 +22,6 @@ import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.DatatypeConverter;
 
-
 /**
  *
  * @author Adam
@@ -30,6 +29,7 @@ import javax.xml.bind.DatatypeConverter;
  */
 @Path("/")
 public class RestControl {
+
     /*
     @GET
     @Path("/")
@@ -46,60 +46,49 @@ public class RestControl {
             
         }
     }
-*/
+     */
     //Apparently this works only when the test() is available... hmm wierd... or not?
     @POST
     @Path("login")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response login(@FormParam("username") String username, @FormParam("password") String password){
-        try{
+    public Response login(@FormParam("username") String username, @FormParam("password") String password) {
+        try {
             String response = service.loginUser(username, password);
 
-            if(response != null){
-            return Response.seeOther(URI.create("../page.html")).cookie(new NewCookie("token", response, "/", null, "Our Token",900, false, false)).build();
-            }else{
-               
+            if (response != null) {
+                return Response.seeOther(URI.create("../page.html")).cookie(new NewCookie("token", response, "/", null, "Our Token", 900, false, false)).build();
+            } else {
+
                 return Response.seeOther(URI.create("../error.html")).build();
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             return Response.seeOther(URI.create("../error.html")).build();
         }
 
-
-   
     }
-    
 
-    
     @Inject
     UserService service;
-    
-    
+
     @POST
     @Path("all")
-    public Response signup(@FormParam("login") String login, @FormParam("firstName") 
-            String firstName, @FormParam("lastName") String lastName, @FormParam("email") String email ,@FormParam("password") String password){
-        
+    public Response signup(@FormParam("login") String login, @FormParam("firstName") String firstName, @FormParam("lastName") String lastName, @FormParam("email") String email, @FormParam("password") String password) {
+
         UserDTO userDTO = new UserDTO();
-                
+
         userDTO.setEmail(email);
         userDTO.setFirstName(firstName);
         userDTO.setLastName(lastName);
         userDTO.setLogin(login);
         userDTO.setPassword(UserService.hashSHA(password));
-                
-        try{
+
+        try {
             UserDTO response = service.createUser(userDTO);
             return Response.seeOther(URI.create("../created.html")).build();
-        }catch(Exception ex){
+        } catch (Exception ex) {
             return Response.serverError().build();
         }
-        
-        
-        
+
     }
 
-    
 }
-
-

@@ -81,7 +81,7 @@
                     data['ispublic'] = "true"; //TODO from checkbox
                     data['editableby'] = "a";
                     data['viewableby'] = "a";
-                    var tags = "fucking tags";
+                    var tags = document.getElementById("hashtags").value;
 
                     var xhr = new XMLHttpRequest();
                     xhr.open("POST", 'rest/note', true);

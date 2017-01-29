@@ -6,6 +6,7 @@
 package com.mycompany.mavenproject1.db;
 
 import com.mycompany.mavenproject1.entity.NoteEntity;
+import com.mycompany.mavenproject1.entity.TagEntity;
 import com.mycompany.mavenproject1.entity.UserEntity;
 import java.io.Serializable;
 import java.util.List;
@@ -30,6 +31,10 @@ public class DAO {
     
     public <T> T find(long id, Class<T> clazz){
         return em.find(clazz, id);
+    }
+    
+    public void edit(Serializable object){
+        em.merge(object);
     }
     
     public UserEntity findUserbyCred(String login){
@@ -78,6 +83,28 @@ public class DAO {
             }else{
                 return ns.get(0);
         }
+        }
+        
+        public List<TagEntity> allTags(){
+            Query q = em.createNamedQuery("Tags.allTags");
+            List<TagEntity> ts = q.getResultList();
+            if(ts.isEmpty()){
+                return null;
+            }else{
+                return ts;
+            }
+        }
+        
+        public TagEntity getNoteIdByTag(String tag){
+            Query q = em.createNamedQuery("Tags.byTag");
+            q.setParameter("tag", tag);
+            q.setMaxResults(1);
+            List<TagEntity> ns = q.getResultList();
+             if(ns.isEmpty()){
+                return null;
+            }else{
+                return ns.get(0);
+            }
         }
     
 }
